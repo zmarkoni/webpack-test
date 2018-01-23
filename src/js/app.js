@@ -1,3 +1,6 @@
+import '../css/main.css'; // load css as inline in the head <style type="text/css">body { ... </style>
+import '../css/input-elements.css';
+
 import { secretParagraph, secretButton } from './dom-loader';
 
 var showSecret = false;
