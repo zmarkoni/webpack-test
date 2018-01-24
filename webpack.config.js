@@ -5,6 +5,7 @@ var extractPlugin = new ExtractTextPlugin({
     filename: 'main.css'
 });
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/js/app.js', // where to start, relative path
@@ -64,6 +65,7 @@ module.exports = {
         // })
         new HtmlWebpackPlugin({ //automatically inject css and js bundle
             template: 'src/index.html'
-        })
+        }),
+        new CleanWebpackPlugin(['dist'])
     ]
 };
