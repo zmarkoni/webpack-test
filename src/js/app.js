@@ -1,31 +1,18 @@
-import '../css/main.css'; // load css as inline in the head <style type="text/css">body { ... </style>
-import '../css/input-elements.css';
+import '../css/main.scss';
+import { RandomGenerator } from  './random-generator';
 
-import { secretParagraph, secretButton } from './dom-loader';
+const outputParagraph = document.querySelector('#outputParagraph');
 
-var showSecret = false;
+const outputRandomInt = () => {
+    outputParagraph.textContent = RandomGenerator.randomInteger();
+};
 
-secretButton.addEventListener('click', toggleSecretState);
-updateSecretParagraph();
+const outputRandomRange = () => {
+    outputParagraph.textContent = RandomGenerator.randomRange(1, 500);
+};
 
-function toggleSecretState() {
-    showSecret = !showSecret;
-    updateSecretParagraph();
-    updateSecretButton()
-}
+const buttonRndInt = document.querySelector('#randomInt');
+const buttonRndRange = document.querySelector('#randomRange');
 
-function updateSecretButton() {
-    if (showSecret) {
-        secretButton.textContent = 'Hide the Secret';
-    } else {
-        secretButton.textContent = 'Show the Secret';
-    }
-}
-
-function updateSecretParagraph() {
-    if (showSecret) {
-        secretParagraph.style.display = 'block';
-    } else {
-        secretParagraph.style.display = 'none';
-    }
-}
+buttonRndInt.addEventListener('click', outputRandomInt);
+buttonRndRange.addEventListener('click', outputRandomRange);
