@@ -47,14 +47,28 @@ module.exports = {
             },
             {
                 test: /\.(jpg|png)$/,
-                use: {
-                    loader: 'file-loader', // google for webpack file loader options
-                    options: {
-                        name: '[name].[ext]', //keep original name and extension
-                        outputPath: 'img/',  // by default will go in dist folder
-                        //publicPath: 'img/' // need also to keep correct reference to new folder 'img'
+                use: [
+                        {
+                        loader: 'file-loader', // google for webpack file loader options
+                        options: {
+                            name: '[name].[ext]', //keep original name and extension
+                            outputPath: 'img/',  // by default will go in dist folder
+                            //publicPath: 'img/' // need also to keep correct reference to new folder 'img'
+                        }
                     }
-                }
+                ]
+            },
+            {
+                test: /\.html$/,
+                use: [
+                        {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                        }
+                    }
+                ],
+                exclude: path.resolve(__dirname, 'src/index.html')
             }
         ]
     },
@@ -64,8 +78,14 @@ module.exports = {
         //     // ...
         // })
         new HtmlWebpackPlugin({ //automatically inject css and js bundle
+            filename: 'index.html',
             template: 'src/index.html'
         }),
+        // new HtmlWebpackPlugin({ //automatically inject css and js bundle
+        //     filename: 'users.html',
+        //     template: 'src/users.html',
+        //     chunks: [] // define which build artifacts should be injected in HTML, like JS, CSS
+        // }),
         new CleanWebpackPlugin(['dist'])
     ]
 };
